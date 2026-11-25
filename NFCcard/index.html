@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sana’a Cafe</title>
+
+<!-- Keep this NFC landing page out of search engines -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+
+<meta name="theme-color" content="#1c1510">
+<link rel="icon" type="image/png" href="https://www.thesanaacafe.com/assets/logo_sanaa.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --page: #1c1510;                 /* outer espresso/ink ground */
+  --card: #33261a;                 /* warm coffee card surface */
+  --logo-bg: #b8862b;              /* warm amber/gold circle behind logo */
+  --accent: #e8c984;               /* golden accent & text highlight */
+  --primary-d: #8f6720;            /* deeper amber hover state */
+  --btn: rgba(184, 134, 43, 0.24); /* warm amber translucent button */
+  --btn-hover: #8f6720;
+  --gap: 16px;                     /* space between card and screen edge */
+  --align: center;                 /* vertically centered content */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  padding: max(var(--gap), env(safe-area-inset-top)) max(var(--gap), env(safe-area-inset-right)) max(var(--gap), env(safe-area-inset-bottom)) max(var(--gap), env(safe-area-inset-left));
+  background: var(--page);
+  color: #fff;
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Parent card container stretched to viewport height with max-width 520px */
+.card {
+  flex: 1;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: var(--align);
+  padding: clamp(28px, 7dvh, 64px) 20px 28px;
+  background: var(--card);
+  border-radius: 28px;
+  border: 1px solid rgba(232, 201, 132, 0.18);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.logo {
+  width: clamp(76px, 22vw, 96px);
+  aspect-ratio: 1;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--logo-bg);
+  border: 2px solid var(--accent);
+  display: grid;
+  place-items: center;
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-fallback {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(18px, 5vw, 22px);
+  font-weight: 700;
+  line-height: 1;
+  color: #1c1510;
+  user-select: none;
+}
+
+h1 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 7.5vw, 32px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 22px 0 14px;
+  text-align: center;
+  color: #fff;
+}
+
+.about {
+  font-size: clamp(13px, 3.7vw, 15px);
+  line-height: 1.5;
+  text-align: center;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.about span {
+  display: block;
+}
+
+.about span + span {
+  margin-top: 6px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.links {
+  width: 100%;
+  display: grid;
+  gap: 18px;
+  margin-top: clamp(32px, 5dvh, 48px);
+}
+
+.link {
+  display: grid;
+  grid-template-columns: 28px 1fr 28px;
+  align-items: center;
+  min-height: 60px;
+  padding: 0 18px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(232, 201, 132, 0.45);
+  background: var(--btn);
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .15s, border-color .15s, color .15s, transform .15s;
+}
+
+.link:hover {
+  background: var(--btn-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.link:active {
+  transform: scale(.98);
+}
+
+.link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.link svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo">
+    <img
+      id="brand-logo"
+      src="https://www.thesanaacafe.com/assets/logo_sanaa.png"
+      alt="Sana’a Cafe logo"
+      width="320"
+      height="320"
+      referrerpolicy="no-referrer"
+    >
+  </div>
+
+  <h1>Sana’a Cafe</h1>
+
+  <p class="about">
+    <span>Yemeni-inspired Coffee &amp; Bakery • Handcrafted Drinks</span>
+    <span>Mon–Fri 7:00 AM–9:00 PM | Sat–Sun 8:00 AM–10:00 PM</span>
+  </p>
+
+  <nav class="links" aria-label="Sana’a Cafe links">
+    <!-- Order Now -->
+    <a class="link" href="https://www.thesanaacafe.com/menu" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 6h14l-1.5 11.5a2 2 0 0 1-2 1.5H8.5a2 2 0 0 1-2-1.5L5 6z"/>
+        <path d="M9 6V4.5a3 3 0 0 1 6 0V6"/>
+      </svg>
+      <span>Order Now</span>
+    </a>
+
+    <!-- Website -->
+    <a class="link" href="https://www.thesanaacafe.com/" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M3 12h18"/>
+        <path d="M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/>
+      </svg>
+      <span>Website</span>
+    </a>
+
+    <!-- Email -->
+    <a class="link" href="mailto:contact@thesanaacafe.com">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2.5"/>
+        <path d="M3.5 7l8.5 6 8.5-6"/>
+      </svg>
+      <span>Email</span>
+    </a>
+
+    <!-- Visit Location -->
+    <a class="link" href="https://www.google.com/maps/search/?api=1&query=2501%20Telegraph%20Ave%2C%20Berkeley%2C%20CA%2094704" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 21s7-6.2 7-11.5a7 7 0 1 0-14 0C5 14.8 12 21 12 21z"/>
+        <circle cx="12" cy="9.5" r="2.5"/>
+      </svg>
+      <span>Visit Location</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+// Graceful fallback if the external Sana'a Cafe logo image fails to load
+(function () {
+  const logoImg = document.getElementById('brand-logo');
+  if (!logoImg) return;
+
+  logoImg.addEventListener('error', function handleLogoError() {
+    const fallback = document.createElement('span');
+    fallback.className = 'logo-fallback';
+    fallback.setAttribute('aria-hidden', 'true');
+    fallback.textContent = 'Sana’a';
+    logoImg.replaceWith(fallback);
+  }, { once: true });
+})();
+</script>
+</body>
+</html>
