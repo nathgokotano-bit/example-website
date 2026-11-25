@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title></title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#b8862b;--primary-d:#8f6720;--accent:#e8c984;--bg:#f6f0e6;--card-bg:#fff;--ink:#1c1510;--band:#33261a;--white:#fff;--nav:72px;--pad:40px;--soft:0 4px 14px rgba(28,21,16,.1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav) + 8px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "DM Sans",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.1;margin:0}
+h2{font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:24px}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+.wrap{max-width:1240px;margin:auto;padding:0 var(--pad)}
+section{padding:56px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:999px;border:2px solid var(--primary);background:var(--primary);color:var(--ink);font:700 1rem "DM Sans",sans-serif;text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--primary-d);border-color:var(--primary-d);color:#fff}
+.btn.o{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.o:hover{background:var(--ink);color:#fff}
+.dark .btn.o,.nav .btn.o{color:#fff;border-color:#fff}
+.dark .btn.o:hover{background:#fff;color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.nav{position:sticky;top:0;z-index:50;height:var(--nav);background:var(--ink);color:#fff}
+.nb{display:flex;align-items:center;gap:20px;height:100%}
+.logo{display:flex;align-items:center;color:#fff;text-decoration:none;font:700 1.4rem Fraunces,serif}
+.logo img{height:44px;width:auto}
+.links{margin-left:auto;display:flex;gap:24px}
+.links a{color:#fff;text-decoration:none;font-weight:500}
+.links a:hover{color:var(--accent)}
+.nb .btn{min-height:44px}
+.soc{display:flex;gap:8px}
+.sc{display:grid;place-items:center;width:40px;height:40px;border:2px solid #fff;border-radius:50%;color:#fff;text-decoration:none}
+.sc svg{width:20px;height:20px}
+.burger{display:none;margin-left:auto;position:relative;width:48px;height:48px;border-radius:50%;border:2px solid #fff;background:none;cursor:pointer}
+.burger span,.burger span::before,.burger span::after{position:absolute;left:12px;width:20px;height:2px;background:#fff}
+.burger span{top:21px}
+.burger span::before,.burger span::after{content:"";left:0}
+.burger span::before{top:-6px}
+.burger span::after{top:6px}
+.drawer{position:fixed;inset:var(--nav) 0 0 0;z-index:49;background:var(--ink);padding:32px var(--pad);display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.drawer[hidden]{display:none}
+.drawer a:not(.btn):not(.sc){color:#fff;font:600 1.8rem Fraunces,serif;text-decoration:none}
+.hero{background:var(--ink);color:#fff;padding:56px 0 72px}
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.eb{color:var(--accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;margin:0 0 12px}
+.hero h1{font-size:clamp(2.4rem,5vw,4.2rem);margin-bottom:16px}
+.hero .sub{font-size:1.15rem;max-width:34ch;margin:0 0 28px}
+.hp{aspect-ratio:4/5;border-radius:24px;overflow:hidden;box-shadow:var(--soft)}
+.hp img,.hp .ph{width:100%;height:100%;object-fit:cover}
+.badge{display:inline-block;margin:20px 0 0;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.12);font-size:.9rem}
+.badge::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:#e5534b}
+.badge.on::before{background:#4cc27f}
+.car{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 16px;margin:0 -4px 16px}
+.car .card{flex:0 0 min(260px,72%);scroll-snap-align:start}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.card{position:relative;background:var(--card-bg);border-radius:14px;box-shadow:var(--soft);transition:transform .25s,box-shadow .25s;animation:up .5s both;animation-delay:calc(var(--n)*40ms)}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(28,21,16,.16)}
+.open{display:block;width:100%;padding:14px 14px 16px;border:0;background:none;border-radius:14px;text-align:center;cursor:pointer;color:inherit;font:inherit}
+.th{display:block;overflow:hidden;border-radius:50%;margin-bottom:10px}
+.th img,.th .ph{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .4s}
+.open:hover .th img{transform:scale(1.06)}
+.ph{display:grid;place-items:center;background:#ddd0b8;color:var(--ink);font:700 2.4rem Fraunces,serif;border-radius:50%}
+.card h3{font:500 1rem "DM Sans",sans-serif;line-height:1.3}
+.pr{margin:2px 0 0;font-weight:700}
+.pill{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:999px;background:var(--accent);font-size:.78rem;font-weight:700}
+.fav{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:50%;background:none;color:var(--primary-d);cursor:pointer;display:grid;place-items:center}
+.fav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2}
+.fav[aria-pressed=true] svg{fill:currentColor}
+.pills{position:sticky;top:var(--nav);z-index:10;display:flex;gap:8px;overflow-x:auto;padding:12px 0;margin-bottom:12px;background:var(--bg)}
+.pills button{flex:none;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:none;color:var(--ink);font:700 .95rem "DM Sans",sans-serif;cursor:pointer}
+.pills button[aria-pressed=true]{background:var(--ink);color:#fff}
+.strip{background:var(--band);color:#fff;padding:20px 0}
+.strip p{margin:0}
+.sp{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sp figure{margin:0;aspect-ratio:3/4;border-radius:20px;overflow:hidden}
+.sp img,.sp .ph{width:100%;height:100%;object-fit:cover;border-radius:0;transition:transform .5s}
+.sp figure:hover img{transform:scale(1.04)}
+.banner{background:var(--band);color:#fff;padding:48px 0}
+.bn{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.banner h2{margin-bottom:8px}
+.banner p{margin:0;max-width:52ch}
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.vg h3{font:700 1rem "DM Sans",sans-serif;margin:20px 0 4px}
+.vg p{margin:0}
+select{min-height:44px;border-radius:999px;border:2px solid var(--ink);background:none;color:var(--ink);padding:0 16px;font:500 1rem "DM Sans",sans-serif;max-width:100%}
+table{width:100%;border-collapse:collapse;margin-bottom:24px}
+td{padding:10px 0;border-bottom:1px solid #d7c9b0}
+td:last-child{text-align:right}
+.mapl{margin:10px 0 0}.mapl a{color:var(--ink);font-weight:700}
+.map{display:block;width:100%;height:420px;border:0;border-radius:20px;background:#ddd0b8}
+footer{background:var(--ink);color:#fff;padding:36px 0}
+.fg{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+footer p{margin:0 0 4px}
+footer a:not(.btn):not(.sc){color:#fff}
+dialog{border:0;border-radius:20px;padding:0;width:min(440px,92vw);color:var(--ink);background:var(--card-bg);animation:pop .25s}
+dialog::backdrop{background:rgba(28,21,16,.6)}
+.dc{padding:24px;text-align:center}
+.dc .th{width:62%;margin:0 auto 16px}
+.dc h2{font-size:1.7rem;margin-bottom:6px}
+.dc .meta{font-weight:700;margin:0 0 10px}
+.dc .row{justify-content:center;margin-top:18px}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+@keyframes pop{from{opacity:0;transform:scale(.94)}}
+@media(max-width:1199px){:root{--pad:32px}}
+@media(max-width:809px){
+:root{--pad:20px;--nav:68px}
+.links,.soc,.nb>.btn{display:none}
+.burger{display:block}
+.hg,.vg{grid-template-columns:1fr;gap:28px}
+.hp{order:-1;aspect-ratio:1}
+.grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.open{padding:10px 8px 14px}
+.sp{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 calc(var(--pad)*-1);padding:0 var(--pad)}
+.sp figure{flex:0 0 78%;scroll-snap-align:center}
+.map{height:320px}
+}
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap nb">
+<a class="logo" id="logo" href="#top"></a>
+<nav class="links" id="links" aria-label="Main"></nav>
+<div class="soc" id="nsoc"></div>
+<a class="btn ord"></a>
+<button class="burger" id="bg" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+</div></header>
+<div class="drawer" id="drawer" hidden></div>
+<main>
+<section class="hero dark" id="top"><div class="wrap hg">
+<div><p class="eb" id="eb"></p><h1 id="h1"></h1><p class="sub" id="sub"></p>
+<div class="row"><a class="btn ord"></a><a class="btn o" href="#menu">View menu</a></div>
+<p class="badge" id="bd" hidden></p></div>
+<div class="hp" id="hp"></div>
+</div></section>
+<section id="signature"><div class="wrap"><h2 id="sigh"></h2><div class="car" id="car"></div><a class="btn o" href="#menu" id="seeall"></a></div></section>
+<section id="menu" style="padding-top:24px"><div class="wrap"><h2 id="menuh"></h2><div class="pills" id="pills" role="group" aria-label="Menu categories"></div><div class="grid" id="grid"></div></div></section>
+<div class="strip" id="strip" hidden><div class="wrap"><p id="striptxt"></p></div></div>
+<section id="space"><div class="wrap"><h2 id="spaceh"></h2><div class="sp" id="sp"></div></div></section>
+<section class="banner dark" id="reviews"><div class="wrap bn"><div><h2 id="rh"></h2><p id="rp"></p></div><a class="btn o" id="rb" target="_blank" rel="noopener"></a></div></section>
+<section id="visit"><div class="wrap vg">
+<div><h2 id="vh"></h2>
+<label id="locl" for="loc" hidden>Choose a location</label><select id="loc" hidden></select>
+<h3>Address</h3><p id="addr"></p>
+<h3 id="emh">Email</h3><p><a id="em"></a></p>
+<h3>Hours</h3><table id="hrs"></table>
+<div class="row"><a class="btn" id="dir" target="_blank" rel="noopener"></a><a class="btn o ord"></a></div></div>
+<div><iframe class="map" id="map" referrerpolicy="no-referrer-when-downgrade"></iframe><p class="mapl"><a id="mapa" target="_blank" rel="noopener"></a></p></div>
+</div></section>
+</main>
+<footer><div class="wrap fg">
+<div><p><strong id="fn"></strong></p><p id="fa"></p><p id="fc"></p><p id="fe"></p><a class="btn o" id="fr" target="_blank" rel="noopener" style="margin-top:12px"></a></div>
+<div class="soc" id="fsoc"></div>
+</div></footer>
+<dialog id="dlg" aria-labelledby="dt"><div class="dc" id="dc"></div></dialog>
+
+<script>
+/* ===== EDIT THESE ===== */
+const CONFIG={
+slug:'sanaa',name:'Sana’a Cafe',short:'Sana’a',tz:'America/Los_Angeles',cur:'$',
+title:'Sana’a Cafe | Yemeni-inspired Coffee & Bakery',
+meta:'Yemeni-inspired coffee, handcrafted drinks and fresh daily bakery. Browse the Sana’a Cafe menu and order ahead for pickup.',
+eyebrow:'Premium organic coffee',
+h1:'Organic coffee, roasted with care.',
+sub:'Handcrafted drinks, fresh bakery, and warm cafe moments designed for the way you move through your day.',
+orderUrl:'https://www.thesanaacafe.com/menu',orderLabel:'Order Now',
+reviewUrl:'', /* PLACEHOLDER: Google review link */
+placeId:'',   /* PLACEHOLDER: Google Place ID */
+email:'contact@thesanaacafe.com',
+logo:'https://www.thesanaacafe.com/assets/logo_sanaa.png',
+hero:{src:'https://www.thesanaacafe.com/assets/my-hero.png',alt:'Sana’a Cafe lifestyle coffee'},
+space:[
+{src:'https://www.thesanaacafe.com/assets/gallery-interior-lights.jpg',alt:'Pendant lights and the gold-accented counter inside Sana’a Cafe'},
+{src:'https://www.thesanaacafe.com/assets/partner-reference-interior.webp',alt:'Warm cafe interior with globe pendant lights, espresso counter and gold wall calligraphy'},
+{src:'https://www.thesanaacafe.com/assets/story-coffee-plant.webp',alt:'Coffee plant at Sana’a Cafe'}],
+locs:[ /* more locations: add {n,a,q,embed?,pid?} */
+{n:'Berkeley Telegraph',a:'2501 Telegraph Ave, Berkeley, CA 94704',q:'2501 Telegraph Ave, Berkeley, CA 94704'},
+{n:'Elk Grove Laguna',a:'9135 W Stockton Blvd #140, Elk Grove, CA 95758',q:'9135 W Stockton Blvd #140, Elk Grove, CA 95758'},
+{n:'Hayward Mission',a:'20885 Mission Blvd, Hayward, CA 94541',q:'20885 Mission Blvd, Hayward, CA 94541'},
+{n:'Roseville Galleria',a:'1180 Galleria Blvd, Roseville, CA 95678',q:'1180 Galleria Blvd, Roseville, CA 95678'}],
+hours:[['Mon–Fri','7:00 AM','9:00 PM'],['Sat–Sun','8:00 AM','10:00 PM']], /* SAMPLE HOURS: replace with real ones. Format: ['Mon–Fri','8:00 AM','12:00 AM'] */
+social:{Facebook:'',Instagram:'',TikTok:''}, /* logos always show; paste a URL to make one clickable */
+strip:{label:'App offer:',text:'Download the Sana’a Cafe app for 20% off your first order. Order ahead, collect rewards, pick up faster.'},
+nav:[['Menu','#menu'],['Visit Us','#visit'],['Reviews','#reviews']],
+t:{sig:'Signature drinks',all:'See full menu',menu:'Menu',space:'The space',visit:'Visit us',dir:'Get directions',close:'Close',rev:'Review on Google',
+rh:'Enjoyed your coffee?',rp:'A quick Google review takes under a minute and helps other coffee lovers find us.',
+hrsEmpty:'[Hours to be confirmed]',mapTitle:'Map to Sana’a Cafe',openMap:'Open in Google Maps'}
+};
+const MENU=[
+{"s": "espresso-4oz", "t": "Espresso (4oz)", "c": "Espresso Drinks", "p": 4.1, "w": "Hot", "d": "A rich, concentrated coffee with a layer of crema.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/3e6b21be-ca6b-4cb7-8399-e44f924840e1.jpg"},
+{"s": "cortado-8oz", "t": "Cortado (8oz)", "c": "Espresso Drinks", "p": 4.49, "w": "Hot", "d": "Espresso balanced with an equal amount of lightly steamed milk.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/ef2f3130-a625-4b6a-97b5-1e20cfcb958b.jpg"},
+{"s": "americano", "t": "Americano", "c": "Espresso Drinks", "p": 4.39, "w": "Iced or hot", "d": "Espresso combined with water for a smooth, bold coffee.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/3175b147-d2ed-4b9c-8938-6538462623e9.png"},
+{"s": "cappuccino-12oz", "t": "Cappuccino (12oz)", "c": "Espresso Drinks", "p": 4.95, "w": "Hot", "d": "Espresso with steamed milk and a rich layer of foam.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/0d38cd51-dd81-4b40-b509-45668a026b0c.jpg"},
+{"s": "latte", "t": "Latte", "c": "Espresso Drinks", "p": 5.5, "w": "Iced or hot", "d": "Espresso combined with smooth, steamed milk.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/b920ea8b-deb3-4a58-8ceb-3e3d7372bedd.jpg"},
+{"s": "caramel-macchiato", "t": "Caramel Macchiato", "c": "Espresso Drinks", "p": 6.79, "w": "Iced or hot", "d": "Espresso with caramel, vanilla and smooth steamed milk.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/f00a2cd9-1442-408d-8172-55be63a68bd3.jpg"},
+{"s": "white-mocha-latte", "t": "White Mocha Latte", "c": "Espresso Drinks", "p": 5.95, "w": "Iced or hot", "d": "Espresso with white chocolate, vanilla and smooth steamed milk.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/ed5424a0-9a75-4663-b82d-7c8d4089a8e8.jpg"},
+{"s": "spanish-latte", "t": "Spanish Latte", "c": "Espresso Drinks", "p": 6.19, "w": "Iced or hot", "d": "Espresso, steamed milk and sweet condensed milk for a creamy, balanced latte.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/98d12309-6a9d-48df-ae57-f61ae9328175.jpg"},
+{"s": "yemeni-latte", "t": "Yemeni Latte", "c": "Espresso Drinks", "p": 6.19, "w": "Iced or hot", "d": "Espresso and steamed milk infused with cinnamon and cardamom.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/855cf402-cc46-4662-adb8-10725d0ec692.jpg"},
+{"s": "sanaa-latte", "t": "Sana’a Latte", "c": "Espresso Drinks", "p": 6.19, "w": "Iced or hot", "d": "Espresso and steamed milk infused with cinnamon, cardamom and ginger.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/30a8259c-09a9-40a3-8398-9985e2a1c0c6.jpg"},
+{"s": "matcha", "t": "Matcha", "c": "Espresso Drinks", "p": 5.89, "w": "Iced or hot", "d": "Smooth green tea blended with steamed milk.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/7c50d6d0-a0e3-48a9-a0a7-af4d67a1501d.png"},
+{"s": "pistachio-latte", "t": "Pistachio Latte", "c": "Espresso Drinks", "p": 6.99, "w": "Iced or hot", "d": "Smooth espresso and creamy milk with rich pistachio flavor.", "f": 1, "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/9/item-1200000013544578339_1790017308.png"},
+{"s": "hot-chocolate", "t": "Hot Chocolate", "c": "Espresso Drinks", "p": 3.99, "w": "Hot", "d": "Rich chocolate blended with smooth, steamed milk.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/8fd27dcf-b578-407c-adf2-0b37269eda55.png"},
+{"s": "mocha-latte", "t": "Mocha Latte", "c": "Espresso Drinks", "p": 5.95, "w": "Iced or hot", "d": "Espresso with rich chocolate, vanilla and smooth steamed milk.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/3/item-1200000013544578343_1790016693.jpg"},
+{"s": "rose-latte", "t": "Rose Latte", "c": "Espresso Drinks", "p": 6.19, "w": "Iced or hot", "d": "Espresso and steamed milk with delicate rose flavor and a lightly sweet finish.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/e1cc6c8e-d2a7-469a-9bc4-1a750882c0ee.png"},
+{"s": "cinnamon-dolce-latte", "t": "Cinnamon Dolce Latte", "c": "Espresso Drinks", "p": 5.99, "w": "Iced or hot", "d": "Espresso and steamed milk with sweet cinnamon syrup and a warm, spiced finish.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/ffc677e1-b826-4b6a-be8d-7f80f92b5da8.jpg"},
+{"s": "biscoff-latte", "t": "Biscoff Latte", "c": "Espresso Drinks", "p": 6.45, "w": "Iced or hot", "d": "Espresso and steamed milk with creamy Biscoff spread for a caramelized finish.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/583a1831-3aca-4073-87cb-1636940c3b0f.png"},
+{"s": "caramel-frappuccino", "t": "Caramel Frappuccino", "c": "Espresso Drinks", "p": 7.99, "w": "Iced only", "d": "Blended iced caramel, milk and ice topped with whipped cream.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/8a9524bd-1682-4c18-8aa3-c0d76ec771c4.png"},
+{"s": "mocha-frappuccino", "t": "Mocha Frappuccino", "c": "Espresso Drinks", "p": 7.99, "w": "Iced only", "d": "Blended iced chocolate, espresso, milk and ice topped with whipped cream.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/816825e1-c5db-4258-9543-e24c7c4b58f1.png"},
+{"s": "shaken-ice-brown-sugar", "t": "Shaken Ice Brown Sugar", "c": "Espresso Drinks", "p": 7.49, "w": "Iced only", "d": "Espresso shaken with ice, brown sugar and a touch of milk.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/469b8bb5-519d-46f0-934c-d6153f910e3b.jpg"},
+{"s": "sanaani", "t": "Sanaani", "c": "Yemeni Style Drinks", "p": 4.99, "w": "Hot", "d": "Medium roast coffee brewed with cardamom, smooth and aromatic.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/27cd16f5-8477-452a-9d0a-f6c7635f708f.png"},
+{"s": "jubani", "t": "Jubani", "c": "Yemeni Style Drinks", "p": 4.99, "w": "Hot", "d": "Medium-light roast and coffee husks brewed with ginger and cardamom.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/b1f34ba3-6c5f-43e5-9a02-c7334e15c016.png"},
+{"s": "arabic-light-roast", "t": "Arabic Light Roast", "c": "Yemeni Style Drinks", "p": 4.99, "w": "Hot", "d": "Light roast coffee brewed with cardamom and a touch of saffron.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/50546487-eaa3-48be-9789-80c83775b44c.png"},
+{"s": "mofawar", "t": "Mofawar", "c": "Yemeni Style Drinks", "p": 5.49, "w": "Hot", "d": "Medium roast coffee brewed with cardamom and finished with cream.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/fea06edc-32a2-4497-9a9d-50d652612035.png"},
+{"s": "qisher", "t": "Qisher", "c": "Yemeni Style Drinks", "p": 4.99, "w": "Hot", "d": "Coffee husks brewed with cinnamon and ginger, lightly spiced and smooth.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/c5d103a5-5ffb-44ba-9ef4-1b50d8e3de9b.png"},
+{"s": "adeni-chai", "t": "Adeni Chai", "c": "Yemeni Style Drinks", "p": 5.49, "w": "Hot", "d": "Yemeni black tea brewed with cardamom and finished with cream.", "f": 1, "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/919fe754-cd19-45eb-9ab1-432757dc937a.png"},
+{"s": "yemeni-black-tea", "t": "Yemeni Black Tea", "c": "Yemeni Style Drinks", "p": 4.99, "w": "Hot", "d": "Yemeni black tea brewed with cardamom and cloves for a bold, warm spice profile.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/47e8edd5-1840-4ce2-a858-9922a24496dc.png"},
+{"s": "turkish-coffee", "t": "Turkish Coffee", "c": "Yemeni Style Drinks", "p": 4.49, "w": "Hot", "d": "Finely ground medium and dark roast, traditionally brewed. 8 oz.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/325aa73c-ed4d-4ede-947f-3db2a3106509.png"},
+{"s": "dirty-chai", "t": "Dirty Chai", "c": "Yemeni Style Drinks", "p": 6.49, "w": "Hot", "d": "Spiced Adeni Chai combined with rich espresso.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/0/item-1200000017009223800_1786653554.png"},
+{"s": "iced-adeni-chai", "t": "Iced Adeni Chai", "c": "Iced Yemeni Specialty Drinks", "p": 5.99, "w": "Iced only", "d": "Yemeni black tea brewed with cardamom and finished with cream, served iced.", "f": 1, "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/ff861c5e-0905-4a78-874d-f4ff636fd08b.jpg"},
+{"s": "iced-mofawar", "t": "Iced Mofawar", "c": "Iced Yemeni Specialty Drinks", "p": 5.99, "w": "Iced only", "d": "Medium roast coffee brewed with cardamom and finished with cream, served iced.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/840e9a2e-e10d-4e22-a75f-f9c640b05d20.jpg"},
+{"s": "iced-sanaani", "t": "Iced Sana’ani", "c": "Iced Yemeni Specialty Drinks", "p": 5.49, "w": "Iced only", "d": "Medium roast coffee brewed with cardamom, served iced.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/4fd96794-512a-4743-8401-47bf747b8dcb.png"},
+{"s": "iced-dirty-chai", "t": "Iced Dirty Chai", "c": "Iced Yemeni Specialty Drinks", "p": 6.99, "w": "Iced only", "d": "Chilled Adeni chai blended with espresso over ice.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/a277b509-d6e5-4e68-a645-8ef979358a73.jpg"},
+{"s": "mango-passion-fruit", "t": "Mango Passion Fruit", "c": "Refreshers", "p": 6.19, "w": "Iced only", "d": "Mango and passion fruit over ice, bright and tropical.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/e24c8b5d-883f-41e8-bced-5e48ca7715c8.png"},
+{"s": "kiwi-dragon-fruit", "t": "Kiwi Dragon Fruit", "c": "Refreshers", "p": 6.19, "w": "Iced only", "d": "Kiwi and dragon fruit over ice, tangy-sweet and crisp.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/a2cf35ab-24ca-4bb5-9339-5c9949614095.png"},
+{"s": "mango-watermelon", "t": "Mango Watermelon", "c": "Refreshers", "p": 6.19, "w": "Iced only", "d": "Mango and watermelon over ice, juicy with a cooling finish.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/293ec3e4-6221-4b33-81f3-361bd2e8f0f0.png"},
+{"s": "lemonade", "t": "Lemonade", "c": "Refreshers", "p": 6.19, "w": "Iced only", "d": "Freshly squeezed lemon juice with a touch of sweetness.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/f07e139b-d8dd-4b64-93bd-122520e5d0af.png"},
+{"s": "mojito", "t": "Mojito", "c": "Refreshers", "p": 6.99, "w": "Iced only", "d": "Mint, lime and sparkling soda over ice.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/5e57c485-58e4-4096-bace-d5ae28b6f5b8.png"},
+{"s": "strawberry-lemonade", "t": "Strawberry Lemonade", "c": "Refreshers", "p": 6.19, "w": "Iced only", "d": "Fresh lemonade blended with ripe strawberries.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/c964cce6-9822-499a-8012-72a2fbc7b8ab.png"},
+{"s": "dragon-fruit", "t": "Dragon Fruit", "c": "Refreshers", "p": 6.19, "w": "Iced only", "d": "A lightly sweet dragon fruit drink over ice.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/db9024a5-9b4b-4ce1-a0d7-12cb3e3f95cd.png"},
+{"s": "strawberry-acai", "t": "Strawberry Acai", "c": "Refreshers", "p": 7.19, "w": "Iced only", "d": "Strawberry and açaí over ice, sweet and tangy.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/e486000e-9fa8-4884-952c-93da774d2c21.png"},
+{"s": "pink-drink", "t": "Pink Drink", "c": "Refreshers", "p": 7.19, "w": "Iced only", "d": "Strawberry açaí and creamy coconut milk over ice.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/28d53578-8ede-4777-a468-7b05f47189b9.png"},
+{"s": "lemon-ginger", "t": "Lemon Ginger", "c": "Refreshers", "p": 5.59, "w": "Iced only", "d": "Lemon and ginger over ice with a bright citrus kick.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/eea80628-9536-4bc5-ba00-77daacab2b03.png"},
+{"s": "mango-dragon-fruit", "t": "Mango Dragon Fruit", "c": "Refreshers", "p": 6.19, "w": "Iced only", "d": "Mango and dragon fruit shaken with ice and refresher base.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328557000000000000/menu/items/9/item-1200000014298484289_1780171601.png"},
+{"s": "mango-smoothie", "t": "Mango Smoothie", "c": "Smoothies", "p": 6.95, "w": "Iced only", "d": "Ripe mango with a touch of Vimto syrup, sweet and tangy.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/a4788b04-3923-4e71-ad39-5c092d3b7b3e.png"},
+{"s": "banana-smoothie", "t": "Banana Smoothie", "c": "Smoothies", "p": 6.95, "w": "Iced only", "d": "Ripe banana and milk, creamy and naturally sweet.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/2e3274a3-b7bb-4d1d-8be6-e7dca18c2bad.png"},
+{"s": "wild-peach-tea", "t": "Wild Peach Tea", "c": "Tea", "p": 4.99, "w": "Iced or hot", "d": "A refreshing tea with a sweet, fruity peach flavor.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/1cc398de-4ae6-4814-a14b-bed3928d650d.png"},
+{"s": "green-tea", "t": "Green Tea", "c": "Tea", "p": 4.95, "w": "Iced or hot", "d": "A light, refreshing tea with a smooth, delicate flavor.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/6a2b0752-8c39-4ec6-818a-7567dd4c05c5.png"},
+{"s": "tangerine-tea", "t": "Tangerine Tea", "c": "Tea", "p": 4.99, "w": "Iced or hot", "d": "A refreshing tea with a bright, citrusy flavor.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/eb5614a3-fe96-43c7-80b0-92496d7532b1/MenuItem/7d25a509-aee7-4a19-a0c3-49bd13aa0c87.png"},
+{"s": "tea-bag", "t": "Tea Bag", "c": "Tea", "p": 3.49, "w": "Hot", "d": "Your choice of any available tea, freshly brewed to order.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/014dc23f-ddc3-4ed7-9d3d-619db42acb89.png"},
+{"s": "banoffee-latte", "t": "Banoffee Latte", "c": "Fall Season Drinks", "p": 6.99, "w": "Iced or hot", "d": "Espresso with creamy milk, sweet banana and smooth caramel. Optional cold foam.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328672000000000000/menu/items/9/item-1200000017827782759_1789075231.png"},
+{"s": "maple-cinnamon-latte", "t": "Maple Cinnamon Latte", "c": "Fall Season Drinks", "p": 6.99, "w": "Iced or hot", "d": "Espresso with creamy milk, sweet maple and a touch of cinnamon. Optional cold foam.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328672000000000000/menu/items/5/item-1200000017827782755_1789075194.png"},
+{"s": "pumpkin-cookie-butter-latte", "t": "Pumpkin Cookie Butter Latte", "c": "Fall Season Drinks", "p": 7.19, "w": "Iced or hot", "d": "Espresso with creamy milk, Biscoff cookie butter and pumpkin spice. Optional cold foam.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328672000000000000/menu/items/7/item-1200000017827782757_1789075213.png"},
+{"s": "pumpkin-snickerdoodle-latte", "t": "Pumpkin Snickerdoodle Latte", "c": "Fall Season Drinks", "p": 7.19, "w": "Iced or hot", "d": "Espresso with creamy milk, pumpkin spice, white mocha and brown sugar. Optional cold foam.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328672000000000000/menu/items/1/item-1200000017827782761_1789075243.png"},
+{"s": "hot-pumpkin-spice-chai", "t": "Hot Pumpkin Spice Chai", "c": "Fall Season Drinks", "p": 6.99, "w": "Hot", "d": "Adeni Chai blend, evaporated milk, pumpkin spice sauce and warm spices. Optional cold foam.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/a1559f14-6788-4b0f-b28f-1d3ccf3269a2.png"},
+{"s": "sanaa-water-bottle-16oz", "t": "Sana’a Water Bottle 16oz", "c": "Cooler Beverage", "p": 3.59, "w": "", "d": "A 16 oz Sana’a water bottle.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328845000000000000/menu/items/1/item-1200000012963833021_1780109468.png"},
+{"s": "honeycomb", "t": "Honeycomb", "c": "Pastries", "p": 6.49, "w": "", "d": "A soft, sweet pastry filled with creamy cheese and finished with honey.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-334849000000000000/menu/images/item-8d6ba8e0-3ac5-458f-bb9c-505f015702f3.jpg"},
+{"s": "pistachio-milk-cake", "t": "Pistachio Milk Cake", "c": "Milk Cakes", "p": 6.99, "w": "", "d": "Pistachio sponge soaked in sweet milk with creamy frosting and crunchy pistachio.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/3/item-1200000013569078063_1790014265.png"},
+{"s": "rose-milk-cake", "t": "Rose Milk Cake", "c": "Milk Cakes", "p": 7.49, "w": "", "d": "Fluffy sponge soaked in sweet rose milk with creamy frosting.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/2/item-1200000013577755562_1790014418.png"},
+{"s": "saffron-milk-cake", "t": "Saffron Milk Cake", "c": "Milk Cakes", "p": 7.49, "w": "", "d": "Sponge soaked in saffron-infused milk with creamy frosting and golden saffron.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/4/item-1200000013577755564_1790014893.png"},
+{"s": "dubai-milk-cake", "t": "Dubai Milk Cake", "c": "Milk Cakes", "p": 8.49, "w": "", "d": "Milk-soaked sponge layered with chocolate and pistachio, with a Middle Eastern twist.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/4/item-1200000013833266094_1790013935.png"},
+{"s": "milk-cake-tray", "t": "Milk Cake Tray", "c": "Milk Cakes", "p": 74.99, "w": "", "d": "A tray of Sana’a milk cakes, made for sharing.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/4/item-1200000013833266094_1790013935.png"},
+{"s": "pistachio-cheesecake", "t": "Pistachio Cheesecake", "c": "Cheesecakes", "p": 8.99, "w": "", "d": "Creamy cheesecake on a buttery biscuit crust with crushed pistachios and rose petals.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/2/item-1200000013569078072_1789763734.png"},
+{"s": "biscoff-cheesecake", "t": "Biscoff Cheesecake", "c": "Cheesecakes", "p": 8.99, "w": "", "d": "Creamy cheesecake on a buttery biscuit crust with Biscoff flavor.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/6/item-1200000013569078076_1789696369.png"},
+{"s": "red-velvet-cheesecake", "t": "Red Velvet Cheesecake", "c": "Cheesecakes", "p": 8.99, "w": "", "d": "Creamy red velvet cheesecake on a buttery biscuit crust.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/2/item-1200000013569078082_1789764087.png"},
+{"s": "oreo-cheesecake", "t": "Oreo Cheesecake", "c": "Cheesecakes", "p": 8.99, "w": "", "d": "Moist chocolate cake layered with creamy filling, chocolate ganache and drizzle.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/9/item-1200000013832648669_1789769655.png"},
+{"s": "tiramisu-cheesecake", "t": "Tiramisu Cheesecake", "c": "Cheesecakes", "p": 8.99, "w": "", "d": "Creamy cheesecake with rich coffee, cocoa and classic tiramisu flavor.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/1/item-1200000013832648671_1789769739.png"},
+{"s": "ferrero-cheesecake", "t": "Ferrero Cheesecake", "c": "Cheesecakes", "p": 8.99, "w": "", "d": "Chocolate cheesecake on a biscuit crust with ganache and a Ferrero-style chocolate.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/3/item-1200000013897320043_1789764074.png"},
+{"s": "ube-cheesecake", "t": "Ube Cheesecake", "c": "Cheesecakes", "p": 8.99, "w": "", "d": "Creamy cheesecake with the sweet, nutty flavor of ube.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328655000000000000/menu/items/5/item-1200000013897320045_1789769759.png"},
+{"s": "small-pistachio-baklava-2pc", "t": "Small Pistachio Baklava 2pc", "c": "Baklava", "p": 4.99, "w": "", "d": "Two crispy, flaky baklava pieces filled with pistachios and sweet syrup.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/7e378b01-afa8-4a75-9edd-87b79ce4086f.png"},
+{"s": "plain-butter-croissant", "t": "Plain Butter Croissant", "c": "Croissants", "p": 5.49, "w": "", "d": "A light, flaky pastry with a rich, buttery flavor.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-367780000000000000/menu/items/3/item-1200000013569079423_1790031335.png"},
+{"s": "almond-croissant", "t": "Almond Croissant", "c": "Croissants", "p": 5.79, "w": "", "d": "Flaky, buttery croissant topped with sliced almonds.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-328702000000000000/menu/items/0/item-1200000013550077110_1785451295.jpg"},
+{"s": "chocolate-croissant", "t": "Chocolate Croissant", "c": "Croissants", "p": 5.99, "w": "", "d": "A buttery, flaky croissant filled with rich chocolate.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-367780000000000000/menu/items/4/item-1200000014938924394_1790027803.png"},
+{"s": "s-m-biscoff-croissant", "t": "S.M. Biscoff Croissant", "c": "Croissants", "p": 8.0, "w": "", "d": "A flaky butter croissant with a Biscoff finish.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-367780000000000000/menu/items/0/item-1200000015552834310_1790032800.png"},
+{"s": "s-m-nutella-chocolate-croissant", "t": "S.M. Nutella Chocolate Croissant", "c": "Croissants", "p": 8.0, "w": "", "d": "Flaky, buttery croissant filled with Nutella and chocolate.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-367780000000000000/menu/items/2/item-1200000015552834312_1790033248.png"},
+{"s": "s-m-pistachio-croissant", "t": "S.M. Pistachio Croissant", "c": "Croissants", "p": 8.0, "w": "", "d": "Flaky croissant filled with creamy pistachio and topped with pistachio pieces.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-367780000000000000/menu/items/4/item-1200000015552834314_1790033400.png"},
+{"s": "beef-fatayer", "t": "Beef Fatayer", "c": "Fatayer & Savory", "p": 5.95, "w": "", "d": "Savory baked pastry filled with seasoned beef and Middle Eastern spices.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/a62fcf6c-eb79-465b-b56a-d1426f6cd50c.jpg"},
+{"s": "chicken-fatayer", "t": "Chicken Fatayer", "c": "Fatayer & Savory", "p": 5.95, "w": "", "d": "Savory baked pastry filled with seasoned chicken and Middle Eastern spices.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/bcb216d4-24a3-45c7-9a58-ac117b8664c8.jpg"},
+{"s": "cheese-fatayer", "t": "Cheese Fatayer", "c": "Fatayer & Savory", "p": 5.95, "w": "", "d": "Savory baked pastry filled with warm, creamy cheese.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/0e8d47c6-b978-46a8-b9b5-44f01249addc.jpg"},
+{"s": "spinach-fatayer", "t": "Spinach Fatayer", "c": "Fatayer & Savory", "p": 5.95, "w": "", "d": "Savory baked pastry filled with spinach.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/b672ec30-527b-4a28-81ec-16843d43c627.jpg"},
+{"s": "potato-fatayer", "t": "Potato Fatayer", "c": "Fatayer & Savory", "p": 5.95, "w": "", "d": "Savory baked pastry filled with seasoned potatoes and Middle Eastern spices.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/49807c8d-f664-49a2-b6b0-4036184af456.jpg"},
+{"s": "chicken-musakhan", "t": "Chicken Musakhan", "c": "Fatayer & Savory", "p": 5.75, "w": "", "d": "Savory pastry filled with tender chicken, caramelized onions and aromatic spices.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/237fedd2-83f5-4794-817a-47baed12377b.jpg"},
+{"s": "zaater-feta", "t": "Zaater Feta", "c": "Fatayer & Savory", "p": 5.95, "w": "", "d": "Savory baked pastry filled with creamy feta and za’atar.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/cd1b59c5-ded7-4e45-a151-f417bfc7523a.jpg"},
+{"s": "egg-cheese-fatayer", "t": "Egg Cheese Fatayer", "c": "Fatayer & Savory", "p": 5.95, "w": "", "d": "Savory baked pastry stuffed with fluffy eggs and melted cheese.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/5499a01b-8f29-4e48-b309-a863b4c4f302.jpg"},
+{"s": "s-m-pastrami-ciabatta-sandwich", "t": "S.M. Pastrami Ciabatta Sandwich", "c": "Fatayer & Savory", "p": 8.0, "w": "", "d": "Savory pastrami in a warm, crispy ciabatta roll.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/74a44a1a-8371-4c4e-b214-02b7aee1c08e.png"},
+{"s": "s-m-turkey-pesto-ciabatta-sandwich", "t": "S.M. Turkey Pesto Ciabatta Sandwich", "c": "Fatayer & Savory", "p": 8.0, "w": "", "d": "Turkey and pesto in a warm ciabatta roll.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/7ae65590-124e-4c89-a20b-a1a1e26b2a1a.png"},
+{"s": "s-m-chicken-ranch-ciabatta-sandwich", "t": "S.M. Chicken Ranch Ciabatta Sandwich", "c": "Fatayer & Savory", "p": 8.0, "w": "", "d": "Grilled chicken, creamy ranch and fresh toppings on a warm, crispy ciabatta roll.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/74a44a1a-8371-4c4e-b214-02b7aee1c08e.png"},
+{"s": "s-m-chicken-shawarma-wrap", "t": "S.M. Chicken Shawarma Wrap", "c": "Fatayer & Savory", "p": 9.99, "w": "", "d": "Tender chicken shawarma wrapped in soft flatbread with savory spices.", "f": "", "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/menu_service/restaurants/dd74a23a-9441-4ef2-bb1b-19802865ec3a/MenuItem/6f8fe9ea-042c-44e7-84ee-1fe9e1846a51.png"},
+{"s": "adeni-chai-honeycomb", "t": "Adeni Chai + Honeycomb", "c": "Pairings", "p": 10.99, "w": "Hot", "d": "Adeni Chai paired with a honeycomb pastry.", "f": 1, "b": "", "g": "", "i": "https://s3.amazonaws.com/toasttab/restaurants/restaurant-342912000000000000/menu/items/3/item-1200000018639521513_1791595981.png"}
+];
+/* ===== END EDIT ===== */
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const C=CONFIG,T=C.t,money=p=>C.cur+p.toFixed(2);
+function fb(i){const o=i.dataset.o;if(o&&!i.dataset.r){i.dataset.r=1;i.src='https://www.thesanaacafe.com/_next/image?url='+encodeURIComponent(o.replace('https://www.thesanaacafe.com',''))+'&w=1080&q=75';return}const s=document.createElement('span');s.className='ph';s.textContent=(i.alt||'?').trim()[0];i.replaceWith(s)}
+const im=(s,a,w,h)=>s?`<img src="${E(s)}" data-o="${E(s)}" alt="${E(a)}" width="${w}" height="${h}" loading="lazy" referrerpolicy="no-referrer" onerror="fb(this)">`:`<span class="ph" role="img" aria-label="${E(a)}">${E(a.trim()[0])}</span>`;
+
+/* hours: one source for table + badge */
+const D=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const days=s=>{const p=s.split(/[–-]/).map(x=>D.indexOf(x.trim().slice(0,3)));if(p.length<2)return[p[0]];const r=[];for(let i=p[0];;i=(i+1)%7){r.push(i);if(i==p[1])break}return r};
+const mins=t=>{const m=/(\d+):(\d+)\s*([AP])M/i.exec(t);return((m[1]%12)+(/P/i.test(m[3])?12:0))*60+ +m[2]};
+function status(){
+if(!C.hours.length)return null;
+const f=new Intl.DateTimeFormat('en-US',{timeZone:C.tz,weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date()),g=k=>f.find(p=>p.type==k).value;
+const d=D.indexOf(g('weekday')),w=10080,t=d*1440+ +g('hour')*60+ +g('minute'),sp=[];
+C.hours.forEach(([ds,o,c])=>{const O=mins(o);let X=mins(c);if(X<=O)X+=1440;days(ds).forEach(x=>sp.push({a:x*1440+O,b:x*1440+X,o,c}))});
+for(const s of sp)for(const k of[0,w])if(t+k>=s.a&&t+k<s.b)return{open:1,txt:'Open now · Closes '+s.c};
+let best=null;for(const s of sp){const dl=(s.a-t+w)%w;if(!best||dl<best.dl)best={dl,s}}
+const day=Math.floor((t+best.dl)/1440)%7;
+return{open:0,txt:'Closed · Opens '+(day==d?'':D[day]+' ')+best.s.o}}
+
+/* inject */
+document.title=C.title;$('meta[name=description]').content=C.meta;
+$('#logo').innerHTML=C.logo?`<img src="${E(C.logo)}" alt="${E(C.name)}" height="44" onerror="this.replaceWith(Object.assign(document.createElement('b'),{textContent:CONFIG.short}))">`:E(C.short);
+$('#logo').setAttribute('aria-label',C.name+' home');
+$('#eb').textContent=C.eyebrow;$('#h1').textContent=C.h1;$('#sub').textContent=C.sub;
+$$('.ord').forEach(a=>{a.href=C.orderUrl;a.textContent=C.orderLabel;a.target='_blank';a.rel='noopener'});
+const links=C.nav.map(([l,h])=>`<a href="${h}">${E(l)}</a>`).join('');
+$('#links').innerHTML=links;
+const IC={
+Facebook:'<path fill="currentColor" d="M13.5 22v-9h3l.5-3.5h-3.5V7.3c0-1 .3-1.7 1.8-1.7H17V2.500C16.700 2.400 15.700 2.300 14.600 2.300c-2.600 0-4.100 1.500-4.100 4.300v2.900H7.500V13h3v9h3z"/>',
+Instagram:'<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>',
+TikTok:'<path fill="currentColor" d="M16.5 3c.3 2.3 1.7 3.8 4 4v3.2c-1.5 0-2.9-.5-4-1.3v6.1c0 3.4-2.7 5.5-5.6 5.5-3 0-5.4-2.3-5.4-5.2 0-3.200 2.800-5.500 6-5.100v3.300c-1.500-.4-2.800.6-2.800 1.900 0 1.100.9 2 2 2 1.200 0 2.100-.8 2.100-2.200V3h3.700z"/>'};
+const soc=Object.entries(C.social).map(([k,u])=>{const s=`<svg viewBox="0 0 24 24" aria-hidden="true">${IC[k]||''}</svg>`;return u?`<a class="sc" href="${E(u)}" target="_blank" rel="noopener" aria-label="${E(C.name)} on ${k}">${s}</a>`:`<span class="sc" role="img" aria-label="${k}">${s}</span>`}).join('');
+$('#nsoc').innerHTML=soc;$('#fsoc').innerHTML=soc;
+$('#drawer').innerHTML=links+`<a class="btn ord" href="${E(C.orderUrl)}" target="_blank" rel="noopener">${E(C.orderLabel)}</a><div class="soc">${soc}</div>`;
+const bg=$('#bg'),dr=$('#drawer');
+const tog=o=>{dr.hidden=!o;bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Close menu':'Open menu');document.body.style.overflow=o?'hidden':''};
+bg.onclick=()=>tog(dr.hidden);dr.onclick=e=>{if(e.target.closest('a'))tog(false)};
+matchMedia('(min-width:810px)').onchange=e=>e.matches&&tog(false);
+$('#hp').innerHTML=im(C.hero.src,C.hero.alt,800,1000);
+const st=status();if(st){const b=$('#bd');b.hidden=false;b.textContent=st.txt;b.className='badge '+(st.open?'on':'')}
+$('#sigh').textContent=T.sig;$('#seeall').textContent=T.all;$('#menuh').textContent=T.menu;$('#spaceh').textContent=T.space;$('#vh').textContent=T.visit;
+
+/* menu */
+const fav=(()=>{try{return JSON.parse(localStorage.getItem(C.slug+':favs')||'[]')}catch(e){return[]}})();
+const save=()=>{try{localStorage.setItem(C.slug+':favs',JSON.stringify(fav))}catch(e){}};
+const heart='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5S3.5 15 3.5 9.2A4.7 4.7 0 0 1 12 6.6a4.7 4.7 0 0 1 8.5 2.6C20.5 15 12 20.5 12 20.5z"/></svg>';
+const card=(m,n)=>`<article class="card" style="--n:${Math.min(n,12)}"><button class="open" data-s="${m.s}"><span class="th">${im(m.i,m.t,300,300)}</span><h3>${E(m.t)}</h3><p class="pr">${money(m.p)}</p>${m.b?`<span class="pill">${E(m.b)}</span>`:''}</button><button class="fav" data-s="${m.s}" aria-pressed="${fav.includes(m.s)}" aria-label="Favorite ${E(m.t)}">${heart}</button></article>`;
+$('#car').innerHTML=MENU.filter(m=>m.f).map(card).join('');
+const cats=[...new Set(MENU.map(m=>m.c))];let cur='All';
+function draw(){
+$('#pills').innerHTML=['All',...cats].map(c=>`<button aria-pressed="${c==cur}" data-c="${E(c)}">${E(c)}</button>`).join('');
+$('#grid').innerHTML=MENU.filter(m=>cur=='All'||m.c==cur).map(card).join('')}
+$('#pills').onclick=e=>{const b=e.target.closest('button');if(b){cur=b.dataset.c;draw()}};
+draw();
+const dlg=$('#dlg');
+function show(s){const m=MENU.find(x=>x.s==s);if(!m)return;
+const meta=[money(m.p),m.w,m.c,m.b].filter(Boolean).join(' · '),u=m.g||C.orderUrl;
+$('#dc').innerHTML=`<span class="th">${im(m.i,m.t,300,300)}</span><h2 id="dt">${E(m.t)}</h2><p class="meta">${E(meta)}</p><p>${E(m.d)}</p><div class="row"><a class="btn" href="${E(u)}" target="_blank" rel="noopener">${E(C.orderLabel)}</a><button class="btn o" id="cl">${E(T.close)}</button></div>`;
+$('#cl').onclick=()=>dlg.close();dlg.showModal()}
+dlg.onclick=e=>{if(e.target===dlg)dlg.close()};
+document.addEventListener('click',e=>{
+const f=e.target.closest('.fav');
+if(f){const s=f.dataset.s,i=fav.indexOf(s);i<0?fav.push(s):fav.splice(i,1);save();$$(`.fav[data-s="${s}"]`).forEach(b=>b.setAttribute('aria-pressed',fav.includes(s)));return}
+const o=e.target.closest('.open');if(o)show(o.dataset.s)});
+
+/* strip, space, reviews */
+if(C.strip&&C.strip.text){$('#strip').hidden=false;$('#striptxt').innerHTML=`<strong>${E(C.strip.label)}</strong> ${E(C.strip.text)}`}
+$('#sp').innerHTML=C.space.map(p=>`<figure>${im(p.src,p.alt,600,800)}</figure>`).join('');
+$('#rh').textContent=T.rh;$('#rp').textContent=T.rp;
+[$('#rb'),$('#fr')].forEach(a=>{a.textContent=T.rev;C.reviewUrl?a.href=C.reviewUrl:a.hidden=true});
+
+/* visit */
+$('#hrs').innerHTML=C.hours.length?C.hours.map(([d,o,c])=>`<tr><td>${E(d)}</td><td>${E(o)} – ${E(c)}</td></tr>`).join(''):`<tr><td colspan="2">${E(T.hrsEmpty)}</td></tr>`;
+$('#dir').textContent=T.dir;$('#mapa').textContent=T.openMap;
+$('#em').textContent=C.email;$('#em').href='mailto:'+C.email;$('#fe').innerHTML=`<a href="mailto:${E(C.email)}">${E(C.email)}</a>`;
+function loc(i){const l=C.locs[i],pid=l.pid||C.placeId;
+$('#addr').textContent=l.n+' · '+l.a;
+$('#dir').href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(l.a)+(pid?'&destination_place_id='+encodeURIComponent(pid):'');
+$('#map').title=T.mapTitle+' – '+l.n;
+$('#map').src=l.embed||'https://maps.google.com/maps?q='+encodeURIComponent(l.q||l.a)+'&output=embed';
+$('#mapa').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(l.a)+(pid?'&query_place_id='+encodeURIComponent(pid):'');
+$('#fa').textContent=l.a}
+if(C.locs.length>1){const s=$('#loc');s.hidden=false;$('#locl').hidden=false;$('#locl').style.cssText='position:absolute;left:-9999px';s.innerHTML=C.locs.map((l,i)=>`<option value="${i}">${E(l.n)}</option>`).join('');s.onchange=()=>loc(s.value)}
+loc(0);
+$('#fn').textContent=C.name;$('#fc').textContent='© '+new Date().getFullYear()+' '+C.name;
+</script>
+</body>
+</html>
